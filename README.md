@@ -1,32 +1,30 @@
-# Username Availability System
+# E-commerce Flash Sale Inventory Manager
 
-## 📌 Project Description
+## 📌 Project Overview
 
-The **Username Availability System** is designed to check whether a username is available during user registration on a social media platform.
+The **Flash Sale Inventory Manager** is a system designed to manage limited product stock during high-traffic events such as flash sales.
 
-The system performs fast username lookup using **HashMap**, suggests alternative usernames if the requested name is already taken, and tracks the most frequently attempted usernames.
-
-This type of system is commonly used in platforms like Twitter, Instagram, gaming platforms, and email services.
+During events like Amazon Prime Day or limited product launches, thousands of users attempt to purchase a product simultaneously. This system ensures that stock is managed efficiently without overselling while maintaining high performance.
 
 ---
 
 ## 🚀 Features
 
-* Instant username availability check
-* O(1) lookup time using HashMap
-* Suggests alternative usernames
-* Tracks most attempted usernames
-* Simple and efficient design
+* Real-time product stock tracking
+* O(1) purchase processing using HashMap
+* Thread-safe operations to prevent overselling
+* FIFO waiting list when stock is unavailable
+* Instant stock availability checking
 
 ---
 
 ## 🧠 Concepts Used
 
-* Hash Table (HashMap)
-* O(1) lookup performance
-* Collision handling
-* Frequency counting
-* Data structures in Java
+* Hash Tables (HashMap)
+* Concurrency handling
+* Synchronization in Java
+* FIFO Queue for waiting list
+* Performance optimization during high traffic
 
 ---
 
@@ -34,6 +32,7 @@ This type of system is commonly used in platforms like Twitter, Instagram, gamin
 
 * Java
 * HashMap
+* Queue (LinkedList)
 * Git
 * GitHub
 
@@ -42,87 +41,78 @@ This type of system is commonly used in platforms like Twitter, Instagram, gamin
 ## 📂 Project Structure
 
 ```
-UsernameSystem.java
+FlashSaleInventoryManager.java
 README.md
 ```
 
 ---
 
-## ⚙️ How It Works
+## ⚙️ How the System Works
 
-### 1️⃣ Check Username Availability
+### 1️⃣ Check Product Stock
 
-The system checks if a username already exists in the HashMap.
-
-Example:
-
-```
-checkAvailability("john_doe") → false
-checkAvailability("jane_smith") → true
-```
-
----
-
-### 2️⃣ Suggest Alternative Usernames
-
-If a username is taken, the system generates alternatives such as:
-
-```
-john_doe1
-john_doe2
-john_doe3
-john.doe
-```
-
----
-
-### 3️⃣ Track Username Attempts
-
-The system records how many times each username was attempted.
+The system instantly checks stock using a HashMap lookup.
 
 Example:
 
 ```
-admin → 10543 attempts
-user → 2500 attempts
+checkStock("IPHONE15_256GB") → 100 units available
 ```
 
 ---
 
-## 💻 Example Output
+### 2️⃣ Purchase Product
+
+If stock is available, the purchase is successful and stock decreases.
+
+Example:
 
 ```
-false
-true
-[john_doe1, john_doe2, john_doe3, john_doe4, john_doe5, john.doe]
-admin
+purchaseItem("IPHONE15_256GB", userId=12345)
+→ Success, 99 units remaining
 ```
+
+---
+
+### 3️⃣ Waiting List System
+
+When stock becomes zero, new users are added to a waiting list.
+
+Example:
+
+```
+purchaseItem("IPHONE15_256GB", userId=99999)
+→ Added to waiting list, position #1
+```
+
+The waiting list follows **FIFO (First In First Out)** order.
 
 ---
 
 ## 📊 Time Complexity
 
-| Operation            | Complexity |
-| -------------------- | ---------- |
-| Check username       | O(1)       |
-| Register user        | O(1)       |
-| Suggest alternatives | O(k)       |
-| Find most attempted  | O(n)       |
+| Operation           | Complexity |
+| ------------------- | ---------- |
+| Check Stock         | O(1)       |
+| Purchase Item       | O(1)       |
+| Add to Waiting List | O(1)       |
 
 ---
 
-## 🌍 Real World Applications
+## 🌍 Real World Use Cases
 
-* Social media username registration
-* Gaming platform usernames
-* Email address availability checking
-* Domain name availability systems
+* Flash sale events
+* Concert ticket booking
+* Limited edition product launches
+* Online gaming item sales
+
+Examples include major e-commerce events like flash sales conducted by large online marketplaces.
 
 ---
 
-## 📚 Learning Outcome
+## 📚 Learning Outcomes
 
-This project demonstrates how **HashMap can be used for real-time lookup operations**, which is a fundamental concept in designing scalable systems.
+This project demonstrates how **HashMap and synchronization can be used to handle high traffic systems while preventing overselling**. It also introduces concurrency-safe design for real-time applications.
 
 ---
 
